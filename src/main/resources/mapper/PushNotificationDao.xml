@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haizhi.np.dispatch.mapper.PushNotificationDao">
+
+	<insert id="insertAllNotification" parameterType="java.util.List">
+		<foreach collection="list" item="item" index="index" separator="">
+	  	  	insert into ${item.notificationTableName}(
+	  	  		user_id,title,company,type,`read`,collected,detail,push_time
+	  	  	) values (
+	  	  		#{item.userID},#{item.title},#{item.company},#{item.type},#{item.read},
+	  	  		#{item.collected},#{item.detail},#{item.pushTime}
+	  	  	);
+	    </foreach>
+	</insert>
+	
+	<insert id="insertNotification" parameterType="com.haizhi.np.dispatch.bean.NotificationInfo">
+		  	insert into ${notificationTableName}(
+	  	  		user_id,title,company,type,`read`,collected,detail,push_time
+	  	  	) values (
+	  	  		#{userID},#{title},#{company},#{type},#{read},
+	  	  		#{collected},#{detail},#{pushTime}
+	  	  	);
+	</insert>
+	
+	<select id="getAllCompanyByMysqlTable" resultType="java.lang.String">
+		select distinct(company_name) from ${mysqlTableName} where
+		 risk_notify = 1 or marketing_notify = 1;
+	</select>
+
+	<select id="getAllCompanyByRisk" resultType="java.lang.String">
+		select distinct(company_name) from ${mysqlTableName} where risk_notify = 1;
+	</select>
+
+	<select id="getAllCompanyByMarketing" resultType="java.lang.String">
+		select distinct(company_name) from ${mysqlTableName} where marketing_notify = 1;
+	</select>
+	
+	<select id="getAllUserByCompany" resultType="java.lang.String">
+	select distinct(user_id) from ${mysqlTableName} where
+		 (risk_notify = 1 or marketing_notify = 1) and company_name = '${company}';
+	</select>
+</mapper>

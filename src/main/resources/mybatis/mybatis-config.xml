@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>  
+    <settings>  
+		<setting name="logImpl" value="COMMONS_LOGGING" /><!--SLF4J LOG4J2 STDOUT_LOGGING  COMMONS_LOGGING-->
+    </settings>
+    <!-- 别名定义 
+    <typeAliases>  
+        <typeAlias alias="pageAccessURL" type="com.lgm.mybatis.model.PageAccessURL" />  
+    </typeAliases>  -->  
+
+    <!--自定义类型处理器 
+    <typeHandlers>-->
+<!-- <typeHandler handler="com.xhm.util.BooleanTypeHandlder" /> -->
+<!--扫描整个包下的自定义类型处理器
+<package name="com.xhm.util"/>
+    </typeHandlers>-->
+
+    <!--plugins插件之 分页拦截器 
+    <plugins>
+    <plugin interceptor="com.xhm.util.PageInterceptor"></plugin>
+    </plugins> -->
+ 
+  
+</configuration> 

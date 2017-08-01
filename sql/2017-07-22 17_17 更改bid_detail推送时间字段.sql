@@ -1,0 +1,1 @@
+update np_rule set field_enddate = 'publish_time' where mongodb_table_name = 'bid_detail';

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haizhi.np.dispatch.mapper.NpVersionManagerDao">
+
+<resultMap type="com.haizhi.np.dispatch.bean.NpVersionManager" id="npVersionManager">
+    <id     column="id" property="id" />
+    <result column="tableName" property="tableName"  />
+    <result column="notificationTableName" property="notificationTableName"  />
+    <result column="lastTime" property="lastTime" javaType="java.sql.Timestamp" jdbcType="TIMESTAMP"/>
+    <result column="tableType" property="tableType"/>
+</resultMap>
+
+	<select id="select" resultType="com.haizhi.np.dispatch.bean.FollowList">
+		select update_time time from follow_list limit 5;
+	</select>
+	
+	<select id="selectAllNpVersionManager" resultMap="npVersionManager">
+		select 
+			id,
+			table_name tableName,
+			notification_table_name notificationTableName,
+			last_time lastTime,
+			table_type tableType
+		 from np_version_manager;
+	</select>
+ 	
+ 	<select id="selectNpVersionManager" resultMap="npVersionManager">
+ 		 select 
+			id,
+			table_name tableName,
+			notification_table_name notificationTableName,
+			last_time lastTime,
+			table_type tableType
+		 from np_version_manager
+		 where 1=1
+		 <if test=" null != tableType and '' != tableType">
+            AND table_type = #{tableType}
+         </if>
+		 ;
+ 	</select>
+
+	<select id="selectFollowItemListByNpVersion" resultType="java.lang.String">
+select distinct(a.company_name) from (
+	select *from ${tableName} where (risk_notify = 1 or marketing_notify = 1) and update_time >'${lastTime}'
+)a ;
+			
+	</select>
+	
+<!-- 	<select id="selectFollowItemListByNpVersionAllTime" resultType="java.lang.String">
+select a.company_name from (
+	select *from ${tableName} where risk_notify = 1 or marketing_notify = 1
+)a group by a.company_name;
+	</select> -->
+	
+	<update id="updateNpVersionManager" parameterType="java.util.List">
+	  <foreach collection="list" item="item" index="index" open="" close="" separator="">
+	  	  update np_version_manager set last_time = #{item.lastTime,jdbcType=TIMESTAMP,javaType=java.sql.Timestamp} where table_name = #{item.tableName,jdbcType=VARCHAR};
+	  </foreach>
+	</update>
+	
+	<update id="saveOrUpdateNpVersionManager" parameterType="com.haizhi.np.dispatch.bean.NpVersionManager">
+	 	insert into np_version_manager (
+	 		table_name,
+	 		notification_table_name,
+	 		`desc`,
+	 		last_time,
+	 		table_type
+	 	) values (
+			#{tableName},
+			#{notificationTableName},
+			#{desc},
+			#{lastTime,jdbcType=TIMESTAMP,javaType=java.sql.Timestamp},
+			#{tableType})  
+		ON DUPLICATE KEY UPDATE 
+			notification_table_name=#{notificationTableName},
+			`desc`=#{desc},
+			last_time=#{lastTime,jdbcType=TIMESTAMP,javaType=java.sql.Timestamp},
+			table_type=#{tableType};
+	</update>
+	
+	<select id="getMaxUpdateTime" resultType="java.sql.Timestamp">
+		select max(update_time) from ${tableName} where risk_notify = 1 or marketing_notify = 1 ;
+	</select>
+	
+	
+	<select id="getLastTime" resultType="java.sql.Timestamp">
+		select last_time from np_version_manager where table_name = #{tableName};
+	</select>
+</mapper>

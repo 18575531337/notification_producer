@@ -1,0 +1,423 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.haizhi.np</groupId>
+    <artifactId>notification-provider</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>notification-provider</name>
+    <packaging>jar</packaging>
+    
+    <url>http://www.haizhi.com</url>
+    <issueManagement>
+        <!--问题管理系统（例如jira）的名字， -->
+        <system>jira</system>
+        <!--该项目使用的问题管理系统的URL -->
+        <url>http://jira.haizhi.com/secure/Dashboard.jspa</url>
+    </issueManagement>
+    
+    <developers>
+        <!--项目开发者的信息 -->
+        <developer>
+            <!--SCM里项目开发者的唯一标识符 -->
+            <id>zhangjunfei</id>
+            <!--项目开发者的全名 -->
+            <name>zhangjunfei</name>
+            <!--项目开发者的email -->
+            <email>zhangjunfei@haizhi.com</email>
+            <!--项目开发者的主页的URL -->
+            <url />
+            <!--项目开发者在项目中扮演的角色，角色元素描述了各种角色 -->
+            <roles>
+                <role>Project Manager</role>
+                <role>Architect</role>
+                <role>Core</role>
+            </roles>
+            <!--项目开发者所属组织 -->
+            <organization>haizhi</organization>
+            <!--项目开发者所属组织的URL -->
+            <organizationUrl>http://www.haizhi.com/banseon</organizationUrl>
+            <!--项目开发者属性，如即时消息如何处理等 -->
+            <properties>
+                <dept>No</dept>
+            </properties>
+            <!--项目开发者所在时区， -11到12范围内的整数。 -->
+            <timezone>8</timezone>
+        </developer>
+    </developers>
+  
+    <dependencies>
+  	<!-- haizhi jar begin -->
+        <dependency>
+  			<groupId>com.haizhi.middleware</groupId>
+  		    <artifactId>follow</artifactId>
+    		<version>1.0.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>framework</artifactId>
+                    <groupId>org.apache.karaf.features</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>standard</artifactId>
+                    <groupId>org.apache.karaf.features</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>enterprise</artifactId>
+                    <groupId>org.apache.karaf.features</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring</artifactId>
+                    <groupId>org.apache.karaf.features</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.camel.karaf</groupId>
+                    <artifactId>apache-camel</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.shiro</groupId>
+                    <artifactId>shiro-features</artifactId>
+                </exclusion>
+            </exclusions>
+  		</dependency>
+        <!-- haizhi jar end -->
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-jcl-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging-->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-nosql</artifactId>
+            <version>2.8.2</version>
+        </dependency>
+        <!-- db begin -->
+        <dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.5</version>
+		</dependency>
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.35</version>
+        </dependency>
+
+        <!-- mongodb begin -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.10.4.RELEASE</version>
+        </dependency>
+
+        <!-- mongodb end -->
+
+        <!-- db end -->
+
+        <!-- spring begin -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.6.RELEASE</version>
+        </dependency>
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.3.6.RELEASE</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-tx</artifactId>
+	        <version>4.3.6.RELEASE</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>4.3.6.RELEASE</version>
+	    </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjrt -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.10</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.10</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/cglib/cglib -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+
+        <!-- spring end -->
+
+        <!-- http begin -->
+        <dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.3</version>
+		</dependency>
+        <!-- http end -->
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.32</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <resources>
+        <!--
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources.${deploy.type}</directory>
+                <filtering>true</filtering>
+            </resource>
+            -->
+            <resource>
+                <targetPath>META-INF</targetPath>
+                <directory>src/main/java/META-INF</directory>
+                <includes>
+                    <include>*/*</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/project/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/project/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>src/main/resources.${deploy.type}</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>passport-server-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>${project.version}</classifier>
+                            <jarName>${project.artifactId}</jarName>
+                            <outputDirectory>${basedir}/project/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${basedir}/project">
+                                    <fileset dir="${basedir}">
+                                        <include name="*.sh" />
+                                        <include name="Metadata.xml" />
+                                        <include name="*.jar" />
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>project_clean</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <tasks>
+                                <!-- 删除project目录 -->
+                                <delete includeEmptyDirs="true" quiet="true">
+                                    <fileset dir="${basedir}/project" />
+                                </delete>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <deploy.type>local</deploy.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>lanzhou</id>
+            <properties>
+                <deploy.type>lanzhou</deploy.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>product</id>
+            <properties>
+                <deploy.type>product</deploy.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <deploy.type>test</deploy.type>
+            </properties>
+        </profile>
+        <profile>
+            <id>online</id>
+            <properties>
+                <deploy.type>online</deploy.type>
+            </properties>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+    "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haizhi.np.dispatch.mapper.RuleMapperDao">
+<!-- 
+about_table_name   aboutTableName,
+ -->
+	<select id="getAllRuleMapper" resultType="com.haizhi.np.dispatch.bean.RuleMapper">
+		select 
+		   mongodb_table_name         mongodbTableName,
+		   
+		   
+		   trigger_condition  triggerCondition,
+		   
+		   operation_Field operationField,
+
+		   push_title pushTitle,
+		   push_title_field   pushTitleField,
+
+		   push_content_type  pushContentType,
+		   push_content_field pushContentField,
+		   
+		   rule_type          ruleType,
+		   rule_push_type     rulePushType,
+		   field_enddate	  fieldEndDate
+		from 
+			np_rule;
+	</select>
+</mapper>

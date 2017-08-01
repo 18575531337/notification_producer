@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN">
+
+    <properties>  
+        <property name="LOG_HOME">/logs</property>  
+        <Property name="service">notification_producer</Property>
+		<Property name="filename">logs/notification_producer.log</Property>
+    </properties> 
+    
+    <Appenders>
+        <!--
+        <NoSql name="mongoAppender" bufferSize="10">
+            <MongoDb databaseName="app_data" collectionName="log4j2" server="172.16.215.16"
+                     port="40042"/>
+
+        </NoSql>
+        -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+        <RollingFile name="RollingFile" fileName="${filename}" filePattern="${filename}.%d{yyyy-MM-dd_HH}.log">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS}  [%t] %-5p %-20c - %m%n" />
+			<Policies>
+		    	<TimeBasedTriggeringPolicy  interval="1" modulate="true" />
+		    </Policies>
+		</RollingFile>
+		
+		<!-- 网络异步
+		<Async name="Async" blocking="false" >
+	      <AppenderRef ref="flume" />
+	    </Async>
+	    -->
+    </Appenders>
+    
+    <Loggers>
+        <Logger name="com" level="ERROR" additivity="true"/>
+        <Logger name="com.mongodb" level="ERROR" additivity="true"/>
+        <logger name="com.mchange.v2" level="DEBUG" additivity="true"/>
+        <logger name="org.apache" level="ERROR" additivity="true"/>
+        <logger name="org.mybatis" level="ERROR" additivity="true"/>
+        <logger name="org.apache.ibatis" level="ERROR" additivity="true"/>
+        <logger name="com.apache.ibatis" level="ERROR" additivity="true" />
+		<logger name="java.sql.Connection" level="ERROR" additivity="true" />
+		<logger name="java.sql.Statement" level="ERROR" additivity="true" />
+		<logger name="java.sql.PreparedStatement" level="ERROR" additivity="true" />
+		<logger name="org.springframework" level="INFO" additivity="true" />
+		<logger name="org.apache.commons" level="ERROR" additivity="true" />
+		<logger name="org.mybatis.spring" level="ERROR" additivity="true" />
+		<logger name="org.apache.ibatis.io" level="ERROR" additivity="true" />
+
+        
+        <Root level="DEBUG">
+            <AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+        </Root>
+    </Loggers>
+</Configuration>
